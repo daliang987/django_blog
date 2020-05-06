@@ -1,12 +1,9 @@
 
-from django.urls import path, re_path
+from django.conf.urls import url
 from blog import views
-from django.conf.urls.static import static
-from django.conf import settings
 
 app_name='blog'
 urlpatterns = [
-
-    path('<int:blog_id>',views.detail,name='blog_detail'),
-    path('',views.index,name='blog_index'),
-]+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT )
+    url(r'(?P<blog_id>\d+)',views.detail,name='blog_detail'),
+    url(r'^$',views.index,name='blog_index'),
+]
