@@ -1,0 +1,10 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+  博客{{ blog_id }} detail
+    {{ entry.title }}
+     <img src="{{ MEDIA_URL }}{{ entry.img }}" width="60%" height="270px">
+    {{ entry.author }}
+    {{ entry.abstract }}
+    {{ entry.body }}
+{% endblock content %}
