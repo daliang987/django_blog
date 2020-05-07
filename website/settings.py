@@ -38,7 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'django.contrib.sitemaps',
+    'django.contrib.sites',
+    'django_comments',
 ]
+
+SITE_ID=1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -120,11 +125,12 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
+# STATIC_ROOT='static'
 STATICFILES_DIRS=[os.path.join(BASE_DIR,'static'),]
 
 
 MEDIA_ROOT=os.path.join(BASE_DIR,'media/').replace('//','/')
 MEDIA_URL='/media/'
 
-
+CLIENT_ID='2925647030'
+APP_SCRET='fd7c67938d6ea76f6f436699df147c5b'

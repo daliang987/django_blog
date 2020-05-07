@@ -1,0 +1,61 @@
+{% load blog_tags %}
+
+{% get_categories as category_list %}
+{% archives as date_list %}
+{% get_tags as tag_list %}
+{% block toc %}
+{% endblock %}
+<div class="row">
+    <div class="widget">
+        <h3>分类:</h3>
+        <ul class="list-group">
+
+            {% for category in category_list %}
+                <li class="list-group-item">
+                    <a href="{% url 'blog:blog_category' category_id=category.id %}">{{ category.name }}</a>
+                    <span class="badge">
+                    {% get_entry_count_of_category category.name %}
+                </span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</div>
+<div class="row">
+    <div class="widget">
+        <h3>归档:</h3>
+        <ul class="list-group">
+
+            {% for date in date_list %}
+                <li class="list-group-item">
+                    <a href="{% url 'blog:blog_archives' date.year date.month %}">
+                        <i class="glyphicon glyphicon-chevron-right"></i>{{ date.year }}年{{ date.month }}月</a>
+                    <span class="badge">
+                    {% get_entry_count_of_date date.year date.month %}
+                </span>
+                </li>
+            {% endfor %}
+
+
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="widget">
+        <h3>标签:</h3>
+        {% for tag in tag_list %}
+            <a href="{% url 'blog:blog_tag' tag.id %}" style="font-size: 20px;">
+                <span class="label {% cycle 'label-default' 'label-primary' 'label-success' 'label-info' 'label-warning' 'label-danger' %}">{{ tag.name }}&nbsp;{% get_entry_count_of_tags tag.name %}</span></a>
+
+
+        {% endfor %}
+
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="rss">
+        <a href="/lastest/feed/"><i class="glyphicon glyphicon-plus"></i>RSS订阅</a>
+    </div>
+</div>
