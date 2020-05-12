@@ -1,7 +1,9 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.db.models import Q
+from django.shortcuts import render, HttpResponse, redirect,get_object_or_404
 from blog import models
 import markdown,pygments
 from blog.utils import list_paginator
+from django_comments.models import Comment
 
 def index(request):
     print('index')
@@ -28,6 +30,18 @@ def detail(request,blog_id):
         entry.toc=md.toc
         entry.increase_visiting()
         # print(locals())
+
+        comment_list=list()
+        def  get_comment_list(comments):
+            for comment in comments:
+                comment_list.append(comment)
+                children=comment.child_comment.all()
+                if len(children)>0:
+                    get_comment_list(children)
+
+        top_comments=Comment.objects.filter(object_pk=blog_id,parent_comment=None,
+                                            content_type__app_label='blog').order_by('-submit_date')
+        get_comment_list(top_comments)
         return render(request,'blog/detail.html',locals())
     else:
         return HttpResponse('文章不存在')
@@ -114,6 +128,21 @@ def login(request):
     return redirect(request.GET.get('next','/'))
 
 
+def search(request):
+    keyword=request.GET.get('keyword',None)
+
+    if not keyword:
+        error_msg='请输入关键字'
+        return render(request,'blog/index.html',locals())
+    entries=models.Entry.objects.filter(Q(title__icontains=keyword)|Q(body__icontains=keyword)|Q(abstract__icontains=keyword))
+
+    page=request.GET.get('page',1)
+    entry_list,paginator=list_paginator.make_paginator(entries,page)
+    page_data=list_paginator.paginator_data(paginator,page)
+
+    return render(request,'blog/index.html',locals())
+
+
 def logout(request):
     if request.session["login"]:
         del request.session["login"]
@@ -125,6 +154,17 @@ def logout(request):
 
     else:
         return redirect('/')
+
+
+from django_comments import models as comment_models
+
+def reply(request,comment_id):
+    if not request.session.get('login',None) and not request.user.is_authenticated():
+        return redirect('/')
+
+    parent_comment=get_object_or_404(Comment,id=comment_id)
+    return render(request,'blog/reply.html',locals())
+
 
 
 

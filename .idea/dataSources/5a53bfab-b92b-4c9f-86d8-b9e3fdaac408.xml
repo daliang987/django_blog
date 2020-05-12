@@ -647,16 +647,15 @@ flag</ColNames>
     <column id="144" parent="19" name="user_email">
       <Position>4</Position>
       <DataType>varchar(254)|0s</DataType>
-      <NotNull>1</NotNull>
     </column>
-    <column id="145" parent="19" name="user_url">
+    <column id="145" parent="19" name="comment">
       <Position>5</Position>
-      <DataType>varchar(200)|0s</DataType>
+      <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="146" parent="19" name="comment">
+    <column id="146" parent="19" name="submit_date">
       <Position>6</Position>
-      <DataType>text|0s</DataType>
+      <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <column id="147" parent="19" name="ip_address">
@@ -681,193 +680,214 @@ flag</ColNames>
     <column id="151" parent="19" name="site_id">
       <Position>11</Position>
       <DataType>integer|0s</DataType>
-      <NotNull>1</NotNull>
     </column>
     <column id="152" parent="19" name="user_id">
       <Position>12</Position>
       <DataType>integer|0s</DataType>
     </column>
-    <column id="153" parent="19" name="submit_date">
+    <column id="153" parent="19" name="level">
       <Position>13</Position>
-      <DataType>datetime|0s</DataType>
-      <NotNull>1</NotNull>
+      <DataType>integer unsigned|0s</DataType>
     </column>
-    <index id="154" parent="19" name="django_comments_content_type_id_c4afe962">
-      <ColNames>content_type_id</ColNames>
-      <ColumnCollations></ColumnCollations>
-    </index>
-    <index id="155" parent="19" name="django_comments_site_id_9dcf666e">
-      <ColNames>site_id</ColNames>
-      <ColumnCollations></ColumnCollations>
-    </index>
-    <index id="156" parent="19" name="django_comments_user_id_a0a440a1">
-      <ColNames>user_id</ColNames>
-      <ColumnCollations></ColumnCollations>
-    </index>
+    <column id="154" parent="19" name="user_img">
+      <Position>14</Position>
+      <DataType>varchar(100)|0s</DataType>
+    </column>
+    <column id="155" parent="19" name="user_url">
+      <Position>15</Position>
+      <DataType>varchar(200)|0s</DataType>
+    </column>
+    <column id="156" parent="19" name="parent_comment_id">
+      <Position>16</Position>
+      <DataType>integer|0s</DataType>
+    </column>
     <index id="157" parent="19" name="django_comments_submit_date_514ed2d9">
       <ColNames>submit_date</ColNames>
       <ColumnCollations></ColumnCollations>
     </index>
-    <key id="158" parent="19">
+    <index id="158" parent="19" name="django_comments_content_type_id_c4afe962">
+      <ColNames>content_type_id</ColNames>
+      <ColumnCollations></ColumnCollations>
+    </index>
+    <index id="159" parent="19" name="django_comments_site_id_9dcf666e">
+      <ColNames>site_id</ColNames>
+      <ColumnCollations></ColumnCollations>
+    </index>
+    <index id="160" parent="19" name="django_comments_user_id_a0a440a1">
+      <ColNames>user_id</ColNames>
+      <ColumnCollations></ColumnCollations>
+    </index>
+    <index id="161" parent="19" name="django_comments_parent_comment_id_6fc6af4e">
+      <ColNames>parent_comment_id</ColNames>
+      <ColumnCollations></ColumnCollations>
+    </index>
+    <key id="162" parent="19">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="159" parent="19">
+    <foreign-key id="163" parent="19">
       <ColNames>content_type_id</ColNames>
       <RefTableName>django_content_type</RefTableName>
       <RefColNames>id</RefColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
     </foreign-key>
-    <foreign-key id="160" parent="19">
+    <foreign-key id="164" parent="19">
       <ColNames>site_id</ColNames>
       <RefTableName>django_site</RefTableName>
       <RefColNames>id</RefColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
     </foreign-key>
-    <foreign-key id="161" parent="19">
+    <foreign-key id="165" parent="19">
       <ColNames>user_id</ColNames>
       <RefTableName>auth_user</RefTableName>
       <RefColNames>id</RefColNames>
       <Deferrable>1</Deferrable>
       <InitiallyDeferred>1</InitiallyDeferred>
     </foreign-key>
-    <column id="162" parent="20" name="id">
+    <foreign-key id="166" parent="19">
+      <ColNames>parent_comment_id</ColNames>
+      <RefTableName>django_comments</RefTableName>
+      <RefColNames>id</RefColNames>
+      <Deferrable>1</Deferrable>
+      <InitiallyDeferred>1</InitiallyDeferred>
+    </foreign-key>
+    <column id="167" parent="20" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="163" parent="20" name="app_label">
+    <column id="168" parent="20" name="app_label">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="164" parent="20" name="model">
+    <column id="169" parent="20" name="model">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="165" parent="20" name="django_content_type_app_label_model_76bd3d3b_uniq">
+    <index id="170" parent="20" name="django_content_type_app_label_model_76bd3d3b_uniq">
       <ColNames>app_label
 model</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="166" parent="20">
+    <key id="171" parent="20">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="167" parent="21" name="id">
+    <column id="172" parent="21" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="168" parent="21" name="app">
+    <column id="173" parent="21" name="app">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="169" parent="21" name="name">
+    <column id="174" parent="21" name="name">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="170" parent="21" name="applied">
+    <column id="175" parent="21" name="applied">
       <Position>4</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="171" parent="21">
+    <key id="176" parent="21">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="172" parent="22" name="session_key">
+    <column id="177" parent="22" name="session_key">
       <Position>1</Position>
       <DataType>varchar(40)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="173" parent="22" name="session_data">
+    <column id="178" parent="22" name="session_data">
       <Position>2</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="174" parent="22" name="expire_date">
+    <column id="179" parent="22" name="expire_date">
       <Position>3</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="175" parent="22" name="sqlite_autoindex_django_session_1">
+    <index id="180" parent="22" name="sqlite_autoindex_django_session_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>session_key</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <index id="176" parent="22" name="django_session_expire_date_a5c62663">
+    <index id="181" parent="22" name="django_session_expire_date_a5c62663">
       <ColNames>expire_date</ColNames>
       <ColumnCollations></ColumnCollations>
     </index>
-    <key id="177" parent="22">
+    <key id="182" parent="22">
       <ColNames>session_key</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_django_session_1</UnderlyingIndexName>
     </key>
-    <column id="178" parent="23" name="id">
+    <column id="183" parent="23" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="179" parent="23" name="name">
+    <column id="184" parent="23" name="name">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="180" parent="23" name="domain">
+    <column id="185" parent="23" name="domain">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="181" parent="23" name="sqlite_autoindex_django_site_1">
+    <index id="186" parent="23" name="sqlite_autoindex_django_site_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>domain</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="182" parent="23">
+    <key id="187" parent="23">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="183" parent="23">
+    <key id="188" parent="23">
       <ColNames>domain</ColNames>
       <UnderlyingIndexName>sqlite_autoindex_django_site_1</UnderlyingIndexName>
     </key>
-    <column id="184" parent="24" name="type">
+    <column id="189" parent="24" name="type">
       <Position>1</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="185" parent="24" name="name">
+    <column id="190" parent="24" name="name">
       <Position>2</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="186" parent="24" name="tbl_name">
+    <column id="191" parent="24" name="tbl_name">
       <Position>3</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="187" parent="24" name="rootpage">
+    <column id="192" parent="24" name="rootpage">
       <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="188" parent="24" name="sql">
+    <column id="193" parent="24" name="sql">
       <Position>5</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="189" parent="25" name="name">
+    <column id="194" parent="25" name="name">
       <Position>1</Position>
     </column>
-    <column id="190" parent="25" name="seq">
+    <column id="195" parent="25" name="seq">
       <Position>2</Position>
     </column>
   </database-model>

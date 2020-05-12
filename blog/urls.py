@@ -9,4 +9,6 @@ urlpatterns = [
     url(r'^category/(?P<category_id>\d+)$',views.category,name='blog_category'),
     url(r'^tag/(?P<tag_id>\d+)$',views.tag,name='blog_tag'),
     url(r'^archives/(?P<year>\d+)/(?P<month>\d+)$',views.archives,name='blog_archives'),
+    url(r'^search$',views.search,name='blog_search'),
+    url(r'^reply/(?P<comment_id>\d+)$',views.reply,name="comment_reply"),
 ]

@@ -3,6 +3,7 @@
 {% load comments %}
 {% block css %}
     <link rel="stylesheet" href="{% static 'blog/css/emacs.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/blog_comment.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -43,7 +44,6 @@
                     <hr/>
                 </div>
                 <div class="row">
-
                     <form class="form-horizontal" action="{% comment_form_target %}" method="post">
                         {% csrf_token %}
                         <div class="form-group">
@@ -75,6 +75,40 @@
                             </div>
                         </div>
                     </form>
+                </div>
+
+                <div class="row">
+                    {% for comment in comment_list %}
+                        <div class="single_comment" style="margin-left: {{ comment.level }}em">
+                            <div>
+                                {% if comment.user_img %}
+                                    <img src="{{ comment.user_img }}" alt="user_image"/>
+                                {% else %}
+                                    <img src="{% static 'blog/images/cl.jpg' %}"/>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-11 comment-content" style="margin-bottom: 10px;">
+                                <strong>{{ comment.comment_title }}</strong>
+                                <div>
+                                    {% if comment.parent_comment %}
+                                        {{ comment.user_name }}{{ request.user }}
+                                        <i class="glyphicon glyphicon-share-alt"></i>
+                                        {{ comment.parent_comment.user_name }}{{ request.user }}
+                                    {% else %}
+                                        By&nbsp;&nbsp;
+                                        {{ comment.user_name }}--{{ request.user }}
+                                        &nbsp;&nbsp;&nbsp;On&nbsp;&nbsp;
+                                    {% endif %}
+                                    <em>{{ comment.submit_date }}</em>
+                                    {% if request.session.login or request.user.is_authenticated %}
+                                        &nbsp;&nbsp;&nbsp;<a href="{% url 'blog:comment_reply' comment.id %}">回复</a>
+                                    {% endif %}
+                                </div>
+                                <br/>
+                                <p>{{ comment.comment }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
             <div class="col-md-3">
