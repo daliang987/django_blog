@@ -14,7 +14,7 @@ cffi==1.14.0
 chardet==3.0.4
 Click==7.0
 colorama==0.4.3
-cryptography==2.9
+cryptography==3.2
 Django==2.1.8
 django-contrib-comments==1.9.2
 django-simpleui==3.9.1
